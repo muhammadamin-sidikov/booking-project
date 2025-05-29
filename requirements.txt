@@ -28,7 +28,5 @@ wheel==0.45.1
 gunicorn
 whitenoise
 
-python-3.12.3
-
 python-decouple
 dj-database-url
