@@ -20,7 +20,7 @@ class GameListSerializer(serializers.ModelSerializer):
         validated_data['qolgan_joy'] = maydon.joy_soni
         return super().create(validated_data)
 
-    def get_maydon(self, obj):
+    def get_maydon(self, obj) -> str:
         return obj.maydon.name
 
 class GameSerializer(serializers.ModelSerializer):

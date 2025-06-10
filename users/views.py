@@ -5,7 +5,11 @@ from django.contrib.auth import authenticate
 from rest_framework import status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, UserCreateSerializer, EmailVerificationSerializer, VerifyCodeSerializer
+from .serializers import (
+    UserSerializer, UserCreateSerializer,
+    EmailVerificationSerializer,
+    VerifyCodeSerializer, LoginSerializer
+)
 from .utils import send_verification_code
 from .models import User, EmailVerification
 
@@ -35,6 +39,7 @@ class UserCreateApi(APIView):
 
 
 class LoginAPIView(APIView):
+    serializer_class = LoginSerializer
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
@@ -59,6 +64,7 @@ class LoginAPIView(APIView):
         return Response({"message": f"Salom, {request.user.email}!"})
 
 class SendEmailVerificationCodeAPIView(APIView):
+    serializer_class = EmailVerificationSerializer
     # def get(self, request):
     #     return Response("get requeset")
 
@@ -70,6 +76,7 @@ class SendEmailVerificationCodeAPIView(APIView):
         return Response({"detail": "Kod yuborildi."})
 
 class VerifyEmailCode(APIView):
+    serializer_class = VerifyCodeSerializer
     def post(self, request):
         serializer = VerifyCodeSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
