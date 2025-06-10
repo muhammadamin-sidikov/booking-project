@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from drf_spectacular.settings import SPECTACULAR_DEFAULTS
 from datetime import timedelta
 from decouple import config
 from pathlib import Path
